@@ -1,0 +1,28 @@
+.Operations {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+
+.Operation {
+    width: auto;
+    display: inline-block;
+    margin: 16px;
+
+    .Switch {
+        margin-right: 10px;
+    }
+}
+
+.CheckboxCard {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+
+.FlexOptions {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: center;
+}

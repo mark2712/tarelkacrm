@@ -1,0 +1,43 @@
+.TableHead {
+    display: block;
+}
+
+.colsVisible {
+    border: 1px solid #ccc;
+    padding: 10px;
+    border-radius: 6px;
+    background: #F9F9FB;
+    margin-bottom: 10px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.colsVisibleElems {
+    display: flex;
+    flex-direction: row;
+    align-items: center
+}
+
+.colsVisibleElem {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding: 0 0px 0 14px;
+    cursor: pointer;
+
+    input {
+        margin-right: 4px;
+    }
+}
+
+
+.colsFilters {
+    border: 1px solid #ccc;
+    padding: 10px;
+    border-radius: 6px;
+    background: #f9f9f9;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}

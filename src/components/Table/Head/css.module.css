@@ -1,0 +1,13 @@
+.TableHeadCell {
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: space-between;
+    align-items: center;
+
+    .AutoWidth,
+    .Move {
+        cursor: pointer;
+        width: 20px;
+        height: 20px;
+    }
+}

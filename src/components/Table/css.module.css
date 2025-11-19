@@ -1,0 +1,18 @@
+.Table {
+    border: 1px solid #222;
+
+    tr,
+    th,
+    td {
+        border: 1px solid #222;
+    }
+
+    th {
+        background-color: #EEEEFF;
+    }
+
+
+    td {
+        padding: 2px;
+    }
+}
