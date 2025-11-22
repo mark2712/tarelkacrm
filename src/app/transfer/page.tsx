@@ -1,18 +1,28 @@
+// import TransferTable from "@/components/transfer/TransferTable";
+
+// export default function Page() {
+//   return (
+//     <div>
+//       <TransferTable />
+//     </div>
+//   );
+// }
+
+
+
 "use client";
-// import styles from "./page.module.css";
-import { DataLoader } from "@/components/DataLoader";
-import Operations from "@/components/Table/Operations";
-import TransferTable from "@/components/transfer/TransferTable";
-import transferOperationStore from "@/components/transfer/store/TransferOperationStore";
-import { transferStoreApi } from "@/components/transfer/store/TransferStoreApi";
+import dynamic from 'next/dynamic';
 
 
-export default function Home() {
+const TransferTable = dynamic(() => import('@/components/transfer/TransferTable'), {
+  ssr: false,
+});
+
+export default function Page() {
   return (
     <>
-      <DataLoader store={transferStoreApi.leads} autoLoad={true} />
-      <Operations operations={transferOperationStore.operations} />
       <TransferTable />
     </>
   );
 }
+

@@ -1,4 +1,6 @@
-import { observer } from "mobx-react";
+"use client";
+
+import { observer } from "mobx-react-lite";
 import { TableData } from "@/components/Table/TableData";
 import TableHeadCell from "./TableHeadCell";
 

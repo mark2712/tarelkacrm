@@ -1,28 +1,31 @@
-import { makeAutoObservable, runInAction } from "mobx";
-import apiUrls from "@/store/api/ApiUrls";
-import { ApiStore } from "@/store/api/ApiStore";
+"use client";
+
+import { computed, makeObservable, observable } from "mobx";
+import apiUrls from "@/common/api/ApiUrls";
+import { ApiStore } from "@/common/api/ApiStore";
 
 
-const token = process.env.API_TOKEN;
+export function getToken(token: string = "") {
+    if (typeof window !== "undefined") {
+        token = localStorage["TRANSFER_API_TOKEN"] ? localStorage["TRANSFER_API_TOKEN"] : token;
+    }
+    return token;
+}
 
 
 export type TransferZakaz = {
     phone: string;
     name1: string;
     all_data: string;
+    date_creation: string;
 };
 
 
-class TransferStoreApi {
-    leads = new ApiStore<TransferZakaz[]>(apiUrls.TRANSFER_GET_LEADS, { token });
-
-    constructor() {
-        makeAutoObservable(this);
-    }
-}
-
-export const transferStoreApi = new TransferStoreApi();
+// получить сырые данные с сервера 
+export const transferStoreApi = new ApiStore<TransferZakaz[]>(apiUrls.TRANSFER_GET_LEADS, { token: getToken() });
 export default transferStoreApi;
+
+
 
 
 // export type TransferZakaz = {
@@ -33,3 +36,4 @@ export default transferStoreApi;
 //     id__handlers: string;
 //     all_data: string;
 // };
+

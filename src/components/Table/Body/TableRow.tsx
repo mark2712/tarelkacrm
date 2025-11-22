@@ -1,6 +1,9 @@
+"use client";
+
 import { TableData } from "@/components/Table/TableData";
-import { observer } from "mobx-react";
+import { observer } from "mobx-react-lite";
 import TableCell from "./TableCell";
+
 
 interface TableRowProps<Row> {
     row: Row | any;

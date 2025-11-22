@@ -1,6 +1,10 @@
+"use client";
+
 import { TableData } from "@/components/Table/TableData";
 import css from "./css.module.css";
-import { observer } from "mobx-react";
+import { observer } from "mobx-react-lite";
+import { Text, Callout, Flex, Separator, Strong } from "@radix-ui/themes";
+
 
 export interface TableHeaderProps<Row> {
     table: TableData<Row>
@@ -10,10 +14,12 @@ const TableHeader = observer(<Row,>({ table }: TableHeaderProps<Row>) => {
     const { columns } = table;
 
     return (
-        <div className={css.TableHeader}>
-            <div className={css.colsVisible}>
-                <div><b>Показать колонки:</b></div>
-                <div className={css.colsVisibleElems}>
+        <Callout.Root color="gray" mt="2" style={{ margin: "10px" }}>
+            <Flex align="start" gap="3" style={{ alignItems: "center" }}>
+                <Text>Строк: <Strong>{table.rows.length}</Strong></Text>
+                <Separator orientation="vertical" />
+                <Text>Показать колонки: </Text>
+                <Flex align="start" gap="1">
 
                     {/* переключатель ВСЕ */}
                     <label className={css.colsVisibleElem}>
@@ -36,14 +42,50 @@ const TableHeader = observer(<Row,>({ table }: TableHeaderProps<Row>) => {
                             <div>{col.title}</div>
                         </label>
                     ))}
-                </div>
-            </div>
-
-            {/* <div className={css.colsFilters}>
-                тут в будущем будут фильтры
-            </div> */}
-        </div>
+                </Flex>
+            </Flex>
+        </Callout.Root>
     );
 });
 
 export default TableHeader;
+
+
+
+// const TableHeader = observer(<Row,>({ table }: TableHeaderProps<Row>) => {
+//     const { columns } = table;
+
+//     return (
+//         <div className={css.TableHeader}>
+//             <div className={css.colsVisible}>
+//                 <div><b>Строк:</b> {table.rows.length}</div>
+//                 <Separator orientation="vertical" />
+//                 <div><b>Показать колонки:</b></div>
+//                 <div className={css.colsVisibleElems}>
+
+//                     {/* переключатель ВСЕ */}
+//                     <label className={css.colsVisibleElem}>
+//                         <input
+//                             type="checkbox"
+//                             checked={columns.every(c => c.visible)}
+//                             onChange={(e) => table.toggleAllColumns(e.target.checked)}
+//                         />
+//                         <div>Все</div>
+//                     </label>
+
+//                     {/* переключатель каждой колонки */}
+//                     {columns.map(col => (
+//                         <label className={css.colsVisibleElem} key={String(col.id)}>
+//                             <input
+//                                 type="checkbox"
+//                                 checked={col.visible}
+//                                 onChange={(e) => table.setColumnVisible(col.id, e.target.checked)}
+//                             />
+//                             <div>{col.title}</div>
+//                         </label>
+//                     ))}
+//                 </div>
+//             </div>
+//         </div>
+//     );
+// });

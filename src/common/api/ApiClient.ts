@@ -1,3 +1,5 @@
+"use client";
+
 import { errorBuffer } from "./ErrorBufferStore";
 
 

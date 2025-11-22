@@ -1,11 +1,15 @@
-import { Operation } from "@/store/operations/Operation";
-import { ProcessedLead } from "../store/TransferTableStore";
-import { observer } from "mobx-react";
+"use client";
+
+import { Operation } from "@/components/Table/Operations/store/Operation";
+import { TLead } from "../store/TransferTableStore";
+import { observer } from "mobx-react-lite";
 import { CheckboxCards, Flex, Text, Card, Switch } from "@radix-ui/themes";
 import operationCSS from "@/components/Table/Operations/operation.module.css";
 
 
-export class DeleteTestNames extends Operation<ProcessedLead, { caseSensitive: boolean }> {
+interface IDeleteTestNamesOptions { caseSensitive: boolean };
+
+export class DeleteTestNames extends Operation<TLead, IDeleteTestNamesOptions> {
     constructor() {
         super("DeleteTestNames", "Убрать тестовые лиды", DeleteTestNamesOptions);
 
@@ -14,7 +18,7 @@ export class DeleteTestNames extends Operation<ProcessedLead, { caseSensitive: b
         };
     }
 
-    apply() {
+    override apply() {
         const isCS = this.options.caseSensitive;
 
         return this.data.filter(x => {
@@ -26,8 +30,8 @@ export class DeleteTestNames extends Operation<ProcessedLead, { caseSensitive: b
 }
 
 
-export const DeleteTestNamesOptions = observer(({ operation }) => {
-    const { caseSensitive } = operation.options;
+export const DeleteTestNamesOptions = observer(({ operation }: any) => {
+    const { caseSensitive }: IDeleteTestNamesOptions = operation.options;
 
     return (
         <CheckboxCards.Root

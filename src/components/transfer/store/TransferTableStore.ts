@@ -1,5 +1,13 @@
-import { makeAutoObservable, observable, reaction } from "mobx";
-import { transferStoreApi, TransferZakaz } from "@/components/transfer/store/TransferStoreApi";
+"use client";
+
+import { action, reaction, toJS } from "mobx";
+import { OperationsController } from "@/components/Table/Operations/store/OperationsController";
+import { Operation } from "@/components/Table/Operations/store/Operation";
+import saveProvider, { ISaveProvider } from "@/common/SaveProvider";
+
+import { DeleteTestNames } from "../operations/deleteTestNames";
+import { PeopleFilter } from "../operations/peopleFilter";
+import transferStoreApi, { TransferZakaz } from "./TransferStoreApi";
 
 
 export interface TransferLeadData {
@@ -17,7 +25,8 @@ export interface TransferLeadData {
     first_page: string;
 }
 
-export interface ProcessedLead {
+export interface TLead {
+    date: string;
     phone: string;
     name1: string;
     comment: string;
@@ -35,32 +44,30 @@ export interface ProcessedLead {
 }
 
 
-export class TransferTableStore {
-    tableLeads = observable.array<ProcessedLead>([]);
+// применяет фильтры
+export class TransferTableStore extends OperationsController<TLead> {
+    constructor(saveProvider: ISaveProvider, operations: Operation<TLead, any>[] = []) {
+        super(saveProvider, operations);
 
-    constructor() {
-        makeAutoObservable(this, {
-            tableLeads: observable,
+        reaction(() => transferStoreApi.data, (value, previousValue, reaction) => {
+            // this.sourceTable = value;
+            this.sourceTable = this.parseAndMapLeadAll(value || [])
         });
-
-        // Реакция на изменение transferStoreApi.leads.data
-        reaction(
-            () => transferStoreApi.leads.data,
-            (leads) => {
-                if (leads) {
-                    const processedLeads = leads.map(lead => this.parseAndMapLead(lead));
-                    this.tableLeads.replace(processedLeads.filter(Boolean) as ProcessedLead[]);
-                }
-            },
-            { fireImmediately: true }
-        );
     }
 
-    private parseAndMapLead(lead: TransferZakaz): ProcessedLead | null {
+    @action
+    private parseAndMapLeadAll(leads: TransferZakaz[]) {
+        return leads.map(lead => this.parseAndMapLead(lead)).filter(Boolean) as TLead[];
+    }
+
+    @action
+    private parseAndMapLead(lead: TransferZakaz): TLead | null {
+        // console.log("TransferTableStore parseAndMapLead");
         try {
             const parsedData: TransferLeadData = JSON.parse(lead.all_data);
 
             return {
+                date: lead.date_creation,
                 phone: lead.phone,
                 name1: lead.name1,
                 comment: parsedData.comment || "",
@@ -83,24 +90,12 @@ export class TransferTableStore {
     }
 }
 
-export const transferTableStore = new TransferTableStore();
-
-
-
-
-// // Расширенный тип с распарсенными данными
-// export type TransferZakazParsed = Omit<TransferZakaz, 'all_data'> & {
-//     all_data: TransferLeadData;
-//     all_data_raw: string; // сохраняем оригинальную строку на всякий случай
-// };
-
-// Дополнительные методы если нужны
-// getLeadsBySection(section: string): ProcessedLead[] {
-//     return this.tableLeads.filter(lead => lead.section === section);
-// }
-
-// getLeadsByGeo(geo: string): ProcessedLead[] {
-//     return this.tableLeads.filter(lead => lead.geo === geo);
-// }
-
+export const transferTableStore = new TransferTableStore(
+    saveProvider.create("TransferOperationStore"),
+    [
+        new DeleteTestNames(),
+        new PeopleFilter(),
+    ]
+);
+export default transferTableStore;
 

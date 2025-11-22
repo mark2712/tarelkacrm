@@ -1,4 +1,4 @@
-.TableHead {
+/* .TableHead {
     display: block;
 }
 
@@ -11,7 +11,7 @@
     display: flex;
     flex-wrap: wrap;
     gap: 10px;
-}
+} */
 
 .colsVisibleElems {
     display: flex;
@@ -20,24 +20,19 @@
 }
 
 .colsVisibleElem {
-    display: flex;
+    cursor: pointer;
     flex-direction: row;
     align-items: center;
-    padding: 0 0px 0 14px;
-    cursor: pointer;
+    display: flex;
+    font-size: 16px;
+    font-weight: 400;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    padding: 2px 8px;
+    margin-right: 5px;
+    background-color: #F8F2FF;
 
     input {
         margin-right: 4px;
     }
-}
-
-
-.colsFilters {
-    border: 1px solid #ccc;
-    padding: 10px;
-    border-radius: 6px;
-    background: #f9f9f9;
-    display: flex;
-    flex-wrap: wrap;
-    gap: 10px;
 }

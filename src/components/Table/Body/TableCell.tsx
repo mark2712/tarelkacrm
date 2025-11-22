@@ -1,8 +1,11 @@
+"use client";
+
 import { BaseColumn } from "@/components/Table/Columns";
-import { observer } from "mobx-react";
+import { observer } from "mobx-react-lite";
+
 
 interface TableCellProps<Value> {
-    col: BaseColumn<any, any, Value>;
+    col: BaseColumn<any, any>;
     value: Value;
 }
 

@@ -1,9 +1,10 @@
 "use client";
-import { ApiStore } from "@/store/api/ApiStore";
-import { observer } from "mobx-react-lite";
-import { useEffect } from "react";
 
-import { Callout, Separator, Flex } from "@radix-ui/themes";
+import { ApiStore } from "@/common/api/ApiStore";
+import { observer } from "mobx-react-lite";
+// import { useEffect } from "react";
+import { InfoCircledIcon, TimerIcon, Link2Icon } from "@radix-ui/react-icons";
+import { Callout, Separator, Flex, Strong } from "@radix-ui/themes";
 
 
 interface DataLoaderProps<T> {
@@ -18,42 +19,42 @@ export const DataLoader = observer(<T,>({
     label
 }: DataLoaderProps<T>) => {
 
-    useEffect(() => {
-        if (autoLoad && !store.data) store.load();
-    }, [autoLoad, store]);
+    // useEffect(() => {
+    //     if (autoLoad && !store.data) store.load();
+    // }, [autoLoad, store]);
 
     const count = Array.isArray(store.data) ? store.data.length : undefined;
 
+    const callout = (<Callout.Root color="gray" mt="2" style={{ margin: "10px" }}>
+        <Flex align="center" gap="3">
+            <Flex align="center">
+                <Callout.Icon style={{ marginRight: "4px" }} ><InfoCircledIcon /></Callout.Icon>
+                <Callout.Text>{label ?? "Загружено элементов"}:  <Strong>{count ?? "—"}</Strong></Callout.Text>
+            </Flex>
+            <Separator orientation="vertical" />
+            <Flex align="center">
+                <Callout.Icon style={{ marginRight: "4px" }} ><TimerIcon /></Callout.Icon>
+                <Callout.Text>Время загрузки: <Strong>{store.loadTime ? store.loadTime.toFixed(3) + " сек" : "—"}</Strong></Callout.Text>
+            </Flex>
+            <Separator orientation="vertical" />
+            <Flex align="center">
+                <Callout.Icon style={{ marginRight: "4px" }} ><Link2Icon /></Callout.Icon>
+                <Callout.Text>Страница api: <Strong>{store.endpoint}</Strong></Callout.Text>
+            </Flex>
+        </Flex>
+    </Callout.Root >);
+
+
     // ----- авто-режим -----
     if (autoLoad) {
-        if (store.loading) return (
-            <Callout.Root color="gray" mt="2" style={{ margin: "10px" }}>
-                <Callout.Icon />
-                <Flex align="center" gap="3">
-                    <Callout.Text>Загрузка...</Callout.Text>
-                    <Separator orientation="vertical" />
-                    <Callout.Text>{store.endpoint}</Callout.Text>
-                </Flex>
-            </Callout.Root>
-        );
-
-        return (
-            <Callout.Root color="gray" mt="2" style={{ margin: "10px" }}>
-                <Callout.Icon />
-                <Flex align="center" gap="3">
-                    <Callout.Text>
-                        <strong>{label ?? "Элементов"}:</strong> {count ?? "—"}
-                    </Callout.Text>
-                    <Separator orientation="vertical" />
-                    <Callout.Text>
-                        <strong>Время загрузки:</strong>{" "}
-                        {store.loadTime ? store.loadTime.toFixed(3) + " сек" : "—"}
-                    </Callout.Text>
-                    <Separator orientation="vertical" />
-                    <Callout.Text><strong>Страница: </strong>{store.endpoint}</Callout.Text>
-                </Flex>
-            </Callout.Root>
-        );
+        if (store.loading) {
+            return (callout);
+        } else {
+            if (!store.firstLoadingEnd) {
+                store.load();
+            }
+        }
+        return (callout);
     }
 
     // ----- ручной режим -----
@@ -67,23 +68,7 @@ export const DataLoader = observer(<T,>({
                 {store.loading ? "Загрузка..." : "Загрузить"}
             </button>
 
-            {!store.loading && store.data && (
-                <Callout.Root color="gray" mt="3">
-                    <Callout.Icon />
-                    <Flex align="center" gap="3">
-                        <Callout.Text>
-                            <strong>{label ?? "Элементов"}:</strong> {count ?? "—"}
-                        </Callout.Text>
-
-                        <Separator orientation="vertical" />
-
-                        <Callout.Text>
-                            <strong>Время загрузки:</strong>{" "}
-                            {store.loadTime ? store.loadTime.toFixed(3) + " сек" : "—"}
-                        </Callout.Text>
-                    </Flex>
-                </Callout.Root>
-            )}
+            {!store.loading && store.data && (callout)}
         </div>
     );
 });

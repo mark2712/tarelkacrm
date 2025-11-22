@@ -1,3 +1,5 @@
+"use client";
+
 import { makeObservable, observable } from "mobx";
 
 export interface TColumn<Row, K extends keyof Row> {
@@ -10,20 +12,19 @@ export interface TColumn<Row, K extends keyof Row> {
 }
 
 export interface TColumnComponent<Value> {
-    cellComponent: React.FC<{ value: Value }> | null;
+    cellComponent: React.FC<{ value: Value }>;
 }
 
-export class BaseColumn<Row, K extends keyof Row>
-    implements TColumn<Row, K>, TColumnComponent<Row[K]> {
+export class BaseColumn<Row, K extends keyof Row> implements TColumn<Row, K>, TColumnComponent<Row[K]> {
 
     id: string;
     field: K;
     title: string;
-    width = 120;
-    autoWidth = true;
-    visible = true;
+    @observable width = 120;
+    @observable autoWidth = true;
+    @observable visible = true;
 
-    cellComponent: React.FC<{ value: Row[K] }> | null = null;
+    cellComponent: React.FC<{ value: Row[K] }>;
 
     constructor(field: K, component: React.FC<{ value: Row[K] }>, id: string = field.toString()) {
         this.field = field;
@@ -31,11 +32,7 @@ export class BaseColumn<Row, K extends keyof Row>
         this.id = id;
         this.title = id;
 
-        makeObservable(this, {
-            width: observable,
-            autoWidth: observable,
-            visible: observable,
-        });
+        makeObservable(this);
     }
 
     Component(component: React.FC<{ value: Row[K] }>) {

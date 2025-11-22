@@ -1,6 +1,6 @@
 import { makeAutoObservable, action, observable, computed } from "mobx";
 import { BaseColumn } from "@/components/Table/Columns";
-import { ISaveProvider } from "@/store/SaveProvider";
+import { ISaveProvider } from "@/common/SaveProvider";
 
 
 export class TableData<Row> {
@@ -8,6 +8,7 @@ export class TableData<Row> {
     private getRows: () => Row[];
     private saveProvider: ISaveProvider;
 
+    @computed
     get rows() {
         return this.getRows();
     }
@@ -17,16 +18,12 @@ export class TableData<Row> {
         this.getRows = getRows;
         this.saveProvider = saveProvider;
 
-        makeAutoObservable(this, {
-            save: action,
-            load: action,
-            setColumnVisible: action,
-            rows: computed,
-        });
+        makeAutoObservable(this);
 
         this.load();
     }
 
+    @action
     save() {
         const payload = this.columns.map(c => ({
             id: String(c.id),
@@ -37,6 +34,7 @@ export class TableData<Row> {
         this.saveProvider.save(JSON.stringify(payload));
     }
 
+    @action
     load() {
         const json = this.saveProvider.load();
         if (!json) return;
@@ -52,6 +50,7 @@ export class TableData<Row> {
     }
 
 
+    @action
     setColumnVisible(columnId: string, visible: boolean) {
         const col = this.columns.find(c => c.id === columnId);
         if (col) {
@@ -60,6 +59,7 @@ export class TableData<Row> {
         }
     }
 
+    @action
     toggleAllColumns(visible: boolean) {
         this.columns.forEach(col => col.visible = visible);
         this.save();

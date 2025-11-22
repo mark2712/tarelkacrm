@@ -1,4 +1,6 @@
-import { makeAutoObservable, toJS } from "mobx";
+"use client";
+
+import { action, makeObservable, observable, toJS } from "mobx";
 
 export interface ErrorData {
     message: string;
@@ -9,13 +11,14 @@ export interface ErrorData {
 }
 
 class ErrorBufferStore {
-    errors: ErrorData[] = [];
+    @observable errors: ErrorData[] = [];
     limit = 10;
 
     constructor() {
-        makeAutoObservable(this);
+        makeObservable(this);
     }
 
+    @action
     push(error: ErrorData) {
         const errorWithId = {
             ...error,
@@ -30,10 +33,12 @@ class ErrorBufferStore {
         console.log(toJS(this.errors));
     }
 
+    @action
     remove(id: string) {
         this.errors = this.errors.filter(error => error.id !== id);
     }
 
+    @action
     clear() {
         this.errors = [];
     }

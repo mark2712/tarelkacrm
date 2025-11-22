@@ -34,7 +34,15 @@ export class MemorySaver implements ISaveProvider {
 
 
 export class SaveProvider {
-    private ProviderClass: { new(key: string): ISaveProvider } = LocalStorageSaver;
+    private ProviderClass: { new(key: string): ISaveProvider };
+
+    constructor() {
+        if (typeof window !== "undefined") {
+            this.ProviderClass = LocalStorageSaver;
+        } else {
+            this.ProviderClass = MemorySaver;
+        }
+    }
 
     create(key: string) {
         return new this.ProviderClass(key);

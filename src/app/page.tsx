@@ -1,15 +1,29 @@
-"use client";
 // import styles from "./page.module.css";
-import { googleStoreApi } from "@/components/google/store/GoogleStoreApi";
-import { DataLoader } from "@/components/DataLoader";
-import GoogleTable from "@/components/google/GoogleTable";
+// import GoogleTable from "@/components/google/GoogleTable";
 
 
-export default function Home() {
+// export default function Home() {
+//   return (
+//     <>
+//       {/* <GoogleTable /> */}
+//       <div></div>
+//     </>
+//   );
+// }
+
+
+"use client";
+
+import dynamic from 'next/dynamic';
+
+// const GoogleTable = dynamic(() => import('@/components/google/GoogleTable'), {
+//   ssr: false,
+// });
+
+export default function Page() {
   return (
     <>
-      <DataLoader store={googleStoreApi.contacts} autoLoad={true} />
-      <GoogleTable />
+      {/* <GoogleTable /> */}
     </>
   );
 }

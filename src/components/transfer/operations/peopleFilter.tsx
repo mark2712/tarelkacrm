@@ -1,13 +1,15 @@
-import { observer } from "mobx-react";
-import { ProcessedLead } from "../store/TransferTableStore";
-import { Operation } from "@/store/operations/Operation";
+"use client";
+
+import { observer } from "mobx-react-lite";
+import { TLead } from "../store/TransferTableStore";
+import { Operation } from "@/components/Table/Operations/store/Operation";
 import { CheckboxCards, Flex, Text, Card, Switch, TextField, Separator } from "@radix-ui/themes";
 import operationCSS from "@/components/Table/Operations/operation.module.css";
 
 
-type TPeopleFilter = { min: number | null; max: number | null; excludeEmpty: boolean };
+interface TPeopleFilter { min: number | null; max: number | null; excludeEmpty: boolean };
 
-export class PeopleFilter extends Operation<ProcessedLead, TPeopleFilter> {
+export class PeopleFilter extends Operation<TLead, TPeopleFilter> {
     constructor() {
         super("PeopleFilter", "Фильтр по количеству человек", PeopleFilterOptions);
 
@@ -18,7 +20,7 @@ export class PeopleFilter extends Operation<ProcessedLead, TPeopleFilter> {
         };
     }
 
-    apply() {
+    override apply() {
         const { min, max, excludeEmpty } = this.options;
 
         return this.data.filter(x => {
@@ -41,7 +43,7 @@ export class PeopleFilter extends Operation<ProcessedLead, TPeopleFilter> {
 }
 
 
-export const PeopleFilterOptions = observer(({ operation }) => {
+export const PeopleFilterOptions = observer(({ operation }: any) => {
     const options: TPeopleFilter = operation.options;
     const { min, max, excludeEmpty } = options;
 

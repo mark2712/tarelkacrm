@@ -1,9 +1,11 @@
-import { observer } from "mobx-react";
+"use client";
+
+import { observer } from "mobx-react-lite";
 import { CheckboxCards, Flex, Text, Card, Switch } from "@radix-ui/themes";
 import operationCSS from "../operation.module.css";
 
 
-export const Operation = observer(({ operation }) => {
+export const Operation = observer(({ operation }: any) => {
     const Options = operation.OptionsComponent;
 
     return (

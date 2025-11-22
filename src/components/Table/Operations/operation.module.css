@@ -8,6 +8,7 @@
     width: auto;
     display: inline-block;
     margin: 16px;
+    background-color: #e8e2f9;
 
     .Switch {
         margin-right: 10px;

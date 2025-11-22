@@ -1,8 +1,9 @@
 "use client";
+
 import { observer } from "mobx-react-lite";
 import * as Dialog from "@radix-ui/react-dialog";
 import { useState } from "react";
-import { errorBuffer, ErrorData } from "@/store/api/ErrorBufferStore";
+import { errorBuffer, ErrorData } from "@/common/api/ErrorBufferStore";
 
 export const ErrorPopup = observer(() => {
     if (errorBuffer.errors.length === 0) return null;

@@ -1,6 +1,6 @@
 import { makeAutoObservable, runInAction } from "mobx";
-import apiUrls from "@/store/api/ApiUrls";
-import { ApiStore } from "@/store/api/ApiStore";
+import apiUrls from "@/common/api/ApiUrls";
+import { ApiStore } from "@/common/api/ApiStore";
 
 
 export type GooglePerson = {
