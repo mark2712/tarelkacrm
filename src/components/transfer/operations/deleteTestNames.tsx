@@ -7,7 +7,7 @@ import { CheckboxCards, Flex, Text, Card, Switch } from "@radix-ui/themes";
 import operationCSS from "@/components/Table/Operations/operation.module.css";
 
 
-interface IDeleteTestNamesOptions { caseSensitive: boolean };
+export interface IDeleteTestNamesOptions { caseSensitive: boolean };
 
 export class DeleteTestNames extends Operation<TLead, IDeleteTestNamesOptions> {
     constructor() {
@@ -30,7 +30,7 @@ export class DeleteTestNames extends Operation<TLead, IDeleteTestNamesOptions> {
 }
 
 
-export const DeleteTestNamesOptions = observer(({ operation }: any) => {
+export const DeleteTestNamesOptions = observer(({ operation }: { operation: Operation<TLead, IDeleteTestNamesOptions> }) => {
     const { caseSensitive }: IDeleteTestNamesOptions = operation.options;
 
     return (
@@ -45,31 +45,8 @@ export const DeleteTestNamesOptions = observer(({ operation }: any) => {
             size="2"
             className={operationCSS.CheckboxCard}
         >
-            <CheckboxCards.Item value="case">
-                Учитывать регистр
-            </CheckboxCards.Item>
+            <CheckboxCards.Item value="case">Учитывать регистр</CheckboxCards.Item>
         </CheckboxCards.Root>
     );
 });
-
-
-// export const DeleteTestNamesOptions = observer(({ operation }) => {
-//     const onChange = (e: { target: { checked: any; }; }) => {
-//         operation.setOptions({
-//             ...operation.options,
-//             caseSensitive: e.target.checked
-//         });
-//     };
-
-//     return (
-//         <label>
-//             <input
-//                 type="checkbox"
-//                 checked={operation.options?.caseSensitive ?? false}
-//                 onChange={onChange}
-//             /> Учитывать регистр
-//         </label>
-//     );
-// });
-
 

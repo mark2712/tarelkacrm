@@ -7,7 +7,7 @@ import { CheckboxCards, Flex, Text, Card, Switch, TextField, Separator } from "@
 import operationCSS from "@/components/Table/Operations/operation.module.css";
 
 
-interface TPeopleFilter { min: number | null; max: number | null; excludeEmpty: boolean };
+export interface TPeopleFilter { min: number | null; max: number | null; excludeEmpty: boolean };
 
 export class PeopleFilter extends Operation<TLead, TPeopleFilter> {
     constructor() {
@@ -43,9 +43,8 @@ export class PeopleFilter extends Operation<TLead, TPeopleFilter> {
 }
 
 
-export const PeopleFilterOptions = observer(({ operation }: any) => {
-    const options: TPeopleFilter = operation.options;
-    const { min, max, excludeEmpty } = options;
+export const PeopleFilterOptions = observer(({ operation }: { operation: Operation<TLead, TPeopleFilter> }) => {
+    const { min, max, excludeEmpty } = operation.options;
 
     return (
         <Flex gap="3" className={operationCSS.FlexOptions}>
@@ -86,6 +85,7 @@ export const PeopleFilterOptions = observer(({ operation }: any) => {
 
             {/* чекбокс — одной строкой */}
             <CheckboxCards.Root
+                title="Фильтровать строки без количества людей"
                 value={excludeEmpty ? ["missing"] : []}
                 onValueChange={(values) => {
                     operation.setOptions({
@@ -96,9 +96,7 @@ export const PeopleFilterOptions = observer(({ operation }: any) => {
                 size="2"
                 className={operationCSS.CheckboxCard}
             >
-                <CheckboxCards.Item value="missing">
-                    Фильтровать строки без количества людей
-                </CheckboxCards.Item>
+                <CheckboxCards.Item value="missing">Фильтровать пустые</CheckboxCards.Item>
             </CheckboxCards.Root>
         </Flex>
     );

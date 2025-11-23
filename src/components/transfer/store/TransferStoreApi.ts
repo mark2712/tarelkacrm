@@ -1,6 +1,5 @@
 "use client";
 
-import { computed, makeObservable, observable } from "mobx";
 import apiUrls from "@/common/api/ApiUrls";
 import { ApiStore } from "@/common/api/ApiStore";
 
@@ -17,7 +16,7 @@ export type TransferZakaz = {
     phone: string;
     name1: string;
     all_data: string;
-    date_creation: string;
+    date_creation_db: string;
 };
 
 
@@ -35,5 +34,6 @@ export default transferStoreApi;
 //     comment: string;
 //     id__handlers: string;
 //     all_data: string;
+//     date_creation: string;
 // };
 

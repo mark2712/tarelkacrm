@@ -1,6 +1,6 @@
 import { makeAutoObservable, action, observable, computed } from "mobx";
-import { BaseColumn } from "@/components/Table/Columns";
-import { ISaveProvider } from "@/common/SaveProvider";
+import { BaseColumn } from "@/components/Table/ColumnsStore";
+import { ISaveProvider } from "@/common/saveData/ISaveProvider";
 
 
 export class TableData<Row> {

@@ -2,7 +2,7 @@
 
 import { observer } from "mobx-react-lite";
 import css from "./css.module.css";
-import { BaseColumn } from "@/components/Table/Columns";
+import { BaseColumn } from "@/components/Table/ColumnsStore";
 import { TableData } from "@/components/Table/TableData";
 import { DragHandleDots1Icon, ChevronLeftIcon, ChevronRightIcon, DropdownMenuIcon, HamburgerMenuIcon } from "@radix-ui/react-icons";
 

@@ -3,7 +3,7 @@
 import { makeObservable, observable } from "mobx";
 
 export interface TColumn<Row, K extends keyof Row> {
-    field: K; // ключ для данных, по нему солонки соотностся с данными
+    field: K; // ключ для данных, по нему колонки соотностся с данными
     id: string; // уникальный id колонки чтобы можно было сделать дубли колонок в одной таблице
     title: string; // отображаемое имя колонки
     width: number;
@@ -61,39 +61,3 @@ export class BaseColumn<Row, K extends keyof Row> implements TColumn<Row, K>, TC
         return this;
     }
 }
-
-
-// import { makeObservable, observable } from "mobx";
-
-// export interface TColumn<Row, K extends keyof Row> {
-//     id: K;
-//     title: string;
-//     width: number;
-//     autoWidth: boolean;
-//     visible: boolean;
-// }
-
-// export interface TColumnComponent<Value> {
-//     cellComponent: React.FC<{ value: Value }>;
-// }
-
-// export class BaseColumn<Row, K extends keyof Row, Value> implements TColumn<Row, K>, TColumnComponent<Value> {
-//     id: K;
-//     title: string;
-//     width = 120;
-//     autoWidth = true;
-//     visible = true;
-//     cellComponent: React.FC<{ value: Value }>;
-
-//     constructor(id: K, title: string, cellComponent: React.FC<{ value: Value }>) {
-//         this.id = id;
-//         this.title = title;
-//         this.cellComponent = cellComponent;
-
-//         makeObservable(this, {
-//             width: observable,
-//             autoWidth: observable,
-//             visible: observable
-//         });
-//     }
-// }

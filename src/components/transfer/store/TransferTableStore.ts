@@ -3,11 +3,17 @@
 import { action, reaction, toJS } from "mobx";
 import { OperationsController } from "@/components/Table/Operations/store/OperationsController";
 import { Operation } from "@/components/Table/Operations/store/Operation";
-import saveProvider, { ISaveProvider } from "@/common/SaveProvider";
 
-import { DeleteTestNames } from "../operations/deleteTestNames";
+import { ISaveProvider } from "@/common/saveData/ISaveProvider";
+import { SaveProvider } from "@/common/saveData/SaveProvider";
+
+import { DeleteTestNames } from "../operations/DeleteTestNames";
 import { PeopleFilter } from "../operations/peopleFilter";
 import transferStoreApi, { TransferZakaz } from "./TransferStoreApi";
+import { TransportNormalizer } from "../operations/TransportNormalizer";
+import { CreateTransport } from "../operations/CreateTransport";
+import { SourceFilter } from "../operations/SourceFilter";
+
 
 
 export interface TransferLeadData {
@@ -36,7 +42,7 @@ export interface TLead {
     ip: string;
     geo: string;
     transport: string;
-    first_referrer: string;
+    firstReferrer: string;
     firstPage: string;
     calc_all: string;
     all_data: string;
@@ -67,7 +73,7 @@ export class TransferTableStore extends OperationsController<TLead> {
             const parsedData: TransferLeadData = JSON.parse(lead.all_data);
 
             return {
-                date: lead.date_creation,
+                date: lead.date_creation_db,
                 phone: lead.phone,
                 name1: lead.name1,
                 comment: parsedData.comment || "",
@@ -77,7 +83,7 @@ export class TransferTableStore extends OperationsController<TLead> {
                 ip: parsedData.ip || "",
                 geo: parsedData.geo || "",
                 transport: parsedData.transport || "",
-                first_referrer: parsedData.first_referrer || "",
+                firstReferrer: parsedData.first_referrer || "",
                 firstPage: parsedData.first_page || "",
                 calc_all: parsedData.calc_all || "",
                 all_data: lead.all_data,
@@ -91,10 +97,13 @@ export class TransferTableStore extends OperationsController<TLead> {
 }
 
 export const transferTableStore = new TransferTableStore(
-    saveProvider.create("TransferOperationStore"),
+    new SaveProvider("TransferOperationStore"),
     [
         new DeleteTestNames(),
+        new TransportNormalizer(),
+        new CreateTransport(),
         new PeopleFilter(),
+        new SourceFilter(),
     ]
 );
 export default transferTableStore;

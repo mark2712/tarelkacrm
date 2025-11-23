@@ -5,14 +5,11 @@ import { CheckboxCards, Flex, Text, Card, Switch } from "@radix-ui/themes";
 import operationCSS from "../operation.module.css";
 
 
-export const Operation = observer(({ operation }: any) => {
+export const OperationComponent = observer(({ operation }: any) => {
     const Options = operation.OptionsComponent;
 
     return (
-        <Card
-            variant="surface"
-            className={operationCSS.Operation}
-        >
+        <Card variant="surface" className={operationCSS.Operation}>
             <Flex justify="start" align="center" mb="2">
                 {/* Переключение операции */}
                 <Switch size="3"
@@ -33,9 +30,11 @@ export const Operation = observer(({ operation }: any) => {
     );
 });
 
-export default Operation;
+export default OperationComponent;
 
 
+
+// если нужено без дизайна
 // export const Operation = observer(({ operation }) => {
 //     const Options = operation.OptionsComponent;
 

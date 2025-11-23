@@ -1,6 +1,6 @@
 import { action, makeObservable, observable, reaction, toJS } from "mobx";
 import { Operation, TOperationSaveData } from "./Operation";
-import { ISaveProvider } from "@/common/SaveProvider";
+import { ISaveProvider } from "@/common/saveData/ISaveProvider";
 
 
 export class OperationsController<TData> {
@@ -58,7 +58,7 @@ export class OperationsController<TData> {
         const allOperations: any = {};
 
         for (const operation of this.operations) {
-            allOperations[operation.id] = operation.serialize();
+            allOperations[operation.id] = operation.save();
         }
 
         this.saveProvider.save(JSON.stringify(allOperations));
@@ -73,7 +73,7 @@ export class OperationsController<TData> {
 
             for (const operation of this.operations) {
                 const saved = parsed[operation.id];
-                if (saved) operation.deserialize(saved);
+                if (saved) operation.load(saved);
             }
         } catch (err) {
             console.warn("Failed to load operations:", err);

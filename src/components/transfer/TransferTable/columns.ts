@@ -1,7 +1,6 @@
 import { TableData } from "@/components/Table/TableData";
-import { BaseColumn } from "@/components/Table/Columns";
-import saveProvider from "@/common/SaveProvider";
-
+import { BaseColumn } from "@/components/Table/ColumnsStore";
+import { SaveProvider } from "@/common/saveData/SaveProvider";
 import CellString from "@/components/TablesCells/CellString";
 import transferOperationStore, { TLead } from "../store/TransferTableStore";
 
@@ -22,7 +21,7 @@ const tableData = new TableData(
         new BaseColumn<TLead, "all_data">("all_data", CellString).Title("Сырые данные"),
     ],
     () => transferOperationStore.resultTable,
-    saveProvider.create("TransferZakazTableSettings"),
+    new SaveProvider("TransferZakazTableSettings"),
 );
 export default tableData;
 
