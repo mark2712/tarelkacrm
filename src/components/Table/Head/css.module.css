@@ -1,12 +1,49 @@
+.CtrlActive {
+    background: rgba(80, 160, 255, 0.15);
+    cursor: pointer;
+}
+
 .TableHeadCell {
     display: flex;
     flex-wrap: nowrap;
     justify-content: space-between;
     align-items: center;
+    /* border-bottom: 1px solid #222; */
 
     .AutoWidth,
     .Move {
         cursor: pointer;
-        margin: 0 2px 0 2px;
+        /* margin: 0 2px 0 2px; */
+    }
+
+    .thTitle {
+        padding: 0 12px;
+    }
+
+    .thSub {
+        display: flex;
+        align-items: center;
+
+        .sortNum {
+            color: #222;
+            font-size: 80%;
+            font-weight: 500;
+        }
+    }
+
+    .Hidden {
+        visibility: hidden;
+        opacity: 0;
+        pointer-events: none;
+    }
+
+    .Active {
+        color: var(--accent-color);
+        /* твой цвет */
+    }
+
+    .Inactive {
+        visibility: visible;
+        opacity: 0.3;
     }
 }

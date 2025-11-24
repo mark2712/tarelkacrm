@@ -2,7 +2,7 @@ import { ISaveProvider } from "../ISaveProvider";
 
 
 export class LocalStorageSaver implements ISaveProvider {
-    constructor(private key: string) { }
+    constructor(public key: string) { }
 
     load() {
         return localStorage.getItem(this.key);

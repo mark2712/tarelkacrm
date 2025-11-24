@@ -11,7 +11,7 @@ export interface IDeleteTestNamesOptions { caseSensitive: boolean };
 
 export class DeleteTestNames extends Operation<TLead, IDeleteTestNamesOptions> {
     constructor() {
-        super("DeleteTestNames", "Убрать тестовые лиды", DeleteTestNamesOptions);
+        super("DeleteTestNames", "Убрать Тест", DeleteTestNamesOptions);
 
         this.options = {
             caseSensitive: false
@@ -23,6 +23,9 @@ export class DeleteTestNames extends Operation<TLead, IDeleteTestNamesOptions> {
 
         return this.data.filter(x => {
             let name = x.name1 ?? "";
+            if (!name) {
+                return false; // удалить пустые имена
+            }
             if (!isCS) name = name.toLowerCase();
             return !name.includes("тест");
         });

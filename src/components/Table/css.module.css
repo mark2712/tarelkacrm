@@ -2,15 +2,15 @@
     border: 1px solid #222;
 
     tr,
-    th,
     td {
         border: 1px solid #222;
     }
 
     th {
         background-color: #EEEEFF;
+        border-left: 1px solid #222;
+        border-right: 1px solid #222;
     }
-
 
     td {
         padding: 2px;

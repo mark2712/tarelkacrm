@@ -10,7 +10,7 @@ interface TableHeadProps<Row> {
 
 const TableHead = observer(<Row,>({ table }: TableHeadProps<Row>) => {
     return (
-        <thead>
+        <thead className="sticky top-0 z-10">
             <tr>
                 {table.columns.map(col => (
                     col.visible && <TableHeadCell key={String(col.id)} col={col} table={table} />

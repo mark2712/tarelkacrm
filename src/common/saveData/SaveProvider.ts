@@ -7,7 +7,7 @@ import { MemorySaver } from "./savers/MemorySaver";
 export class SaveProvider implements ISaveProvider {
     private saver: ISaveProvider;
 
-    constructor(key: string) {
+    constructor(public key: string) {
         this.saver = typeof window !== "undefined"
             ? new LocalStorageSaver(key)
             : new MemorySaver(key);
