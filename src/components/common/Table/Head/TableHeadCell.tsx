@@ -2,8 +2,8 @@
 
 import { observer } from "mobx-react-lite";
 import css from "./css.module.css";
-import { BaseColumn } from "@/components/Table/ColumnsStore";
-import { TableData } from "@/components/Table/TableData";
+import { BaseColumn } from "@/components/common/Table/ColumnsStore";
+import { TableData } from "@/components/common/Table/TableData";
 import { ArrowUpIcon, ArrowDownIcon, ChevronLeftIcon, ChevronRightIcon } from "@radix-ui/react-icons";
 import { useEffect, useState } from "react";
 

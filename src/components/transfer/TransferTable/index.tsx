@@ -3,12 +3,12 @@
 import { observer } from "mobx-react-lite";
 import { useSearchParams } from "next/navigation";
 
-import { DataLoader } from "@/components/DataLoader";
+import { DataLoader } from "@/components/common/DataLoader";
 import { transferStoreApi } from "@/components/transfer/store/TransferStoreApi";
 
-import Table from "@/components/Table";
+import Table from "@/components/common/Table";
 import tableData from "./columns";
-import Operations from "@/components/Table/Operations";
+import Operations from "@/components/common/Table/Operations";
 import transferOperationStore from "@/components/transfer/store/TransferTableStore";
 
 

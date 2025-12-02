@@ -1,4 +1,4 @@
-import { Operation } from "@/components/Table/Operations/store/Operation";
+import { Operation } from "@/components/common/Table/Operations/store/Operation";
 import { TLead } from "../store/TransferTableStore";
 
 

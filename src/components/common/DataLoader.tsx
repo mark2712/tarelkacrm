@@ -26,7 +26,7 @@ export const DataLoader = observer(<T,>({
     const count = Array.isArray(store.data) ? store.data.length : undefined;
 
     const callout = (<Callout.Root color="gray" mt="2" style={{ margin: "10px" }}>
-        <Flex align="center" gap="3">
+        <Flex align="center" gap="3" style={{ flexWrap: "wrap" }}>
             <Flex align="center">
                 <Callout.Icon style={{ marginRight: "4px" }} ><InfoCircledIcon /></Callout.Icon>
                 <Callout.Text>{label ?? "Загружено элементов"}:  <Strong>{count ?? "—"}</Strong></Callout.Text>

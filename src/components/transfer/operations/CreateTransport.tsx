@@ -1,7 +1,7 @@
-import { Operation } from "@/components/Table/Operations/store/Operation";
+import { Operation } from "@/components/common/Table/Operations/store/Operation";
 import { TLead } from "../store/TransferTableStore";
 import { CheckboxCards } from "@radix-ui/themes";
-import operationCSS from "@/components/Table/Operations/operation.module.css";
+import operationCSS from "@/components/common/Table/Operations/operation.module.css";
 import { observer } from "mobx-react-lite";
 
 

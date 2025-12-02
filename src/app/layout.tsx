@@ -4,7 +4,7 @@ import { Theme } from "@radix-ui/themes";
 
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
-import { ErrorPopup } from "@/components/ErrorPopup";
+import { ErrorPopup } from "@/components/common/ErrorPopup";
 
 
 const geistSans = Geist({

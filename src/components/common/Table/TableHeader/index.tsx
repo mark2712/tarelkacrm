@@ -1,6 +1,6 @@
 "use client";
 
-import { TableData } from "@/components/Table/TableData";
+import { TableData } from "@/components/common/Table/TableData";
 import css from "./css.module.css";
 import { observer } from "mobx-react-lite";
 import { Text, Callout, Flex, Separator, Strong } from "@radix-ui/themes";
@@ -16,7 +16,7 @@ const TableHeader = observer(<Row,>({ table }: TableHeaderProps<Row>) => {
 
     return (
         <Callout.Root color="gray" mt="2" style={{ margin: "10px" }}>
-            <Flex align="start" gap="3" style={{ alignItems: "center" }}>
+            <Flex align="start" gap="3" style={{ alignItems: "center", flexWrap: "wrap" }}>
                 <TableHeaderDropdownMenu table={table} />
                 <Separator orientation="vertical" />
 
@@ -24,8 +24,7 @@ const TableHeader = observer(<Row,>({ table }: TableHeaderProps<Row>) => {
                 <Separator orientation="vertical" />
 
                 <Text>Показать колонки: </Text>
-                <Flex align="start" gap="1">
-
+                <Flex align="start" gap="1" style={{ flexWrap: "wrap" }}>
                     {/* переключатель ВСЕ */}
                     <label className={css.colsVisibleElem}>
                         <input

@@ -11,6 +11,17 @@ export function getToken(token: string = "") {
     return token;
 }
 
+export function getUrlDates() {
+    if (typeof window === "undefined") return { date1: "", date2: "" };
+
+    const params = new URLSearchParams(window.location.search);
+
+    return {
+        date1: params.get("date1") || "",
+        date2: params.get("date2") || "",
+    };
+}
+
 
 export type TransferZakaz = {
     phone: string;
@@ -21,7 +32,7 @@ export type TransferZakaz = {
 
 
 // получить сырые данные с сервера 
-export const transferStoreApi = new ApiStore<TransferZakaz[]>(apiUrls.TRANSFER_GET_LEADS, { token: getToken() });
+export const transferStoreApi = new ApiStore<TransferZakaz[]>(apiUrls.TRANSFER_GET_LEADS, { token: getToken(), ...getUrlDates() });
 export default transferStoreApi;
 
 

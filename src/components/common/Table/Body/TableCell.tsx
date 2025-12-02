@@ -1,6 +1,6 @@
 "use client";
 
-import { BaseColumn } from "@/components/Table/ColumnsStore";
+import { BaseColumn } from "@/components/common/Table/ColumnsStore";
 import { observer } from "mobx-react-lite";
 
 

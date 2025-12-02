@@ -4,7 +4,8 @@
 const baseUrl = "https://waygo.webtm.ru";
 
 export const apiUrls = {
-    GOOGLE_GET_CONTACTS: `${baseUrl}/PeopleService_json.php`,
+    GOOGLE_GET_CONTACTS_OLD: `${baseUrl}/PeopleService_json.php`,
+    GOOGLE_GET_CONTACTS: `${baseUrl}/api/google_api/PeopleService_json.php`,
     TRANSFER_GET_LEADS: `${baseUrl}/transfer/leads.php`,
 } as const;
 

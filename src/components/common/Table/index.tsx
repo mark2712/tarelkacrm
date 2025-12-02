@@ -2,8 +2,8 @@
 
 import { observer } from "mobx-react-lite";
 import css from "./css.module.css";
-import { TableData } from "@/components/Table/TableData";
-import TableHeader from "@/components/Table/TableHeader";
+import { TableData } from "@/components/common/Table/TableData";
+import TableHeader from "@/components/common/Table/TableHeader";
 import TableHead from "./Head/TableHead";
 import TableBody from "./Body/TableBody";
 

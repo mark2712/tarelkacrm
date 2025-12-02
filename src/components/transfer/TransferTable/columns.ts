@@ -1,7 +1,7 @@
-import { TableData } from "@/components/Table/TableData";
-import { BaseColumn } from "@/components/Table/ColumnsStore";
+import { TableData } from "@/components/common/Table/TableData";
+import { BaseColumn } from "@/components/common/Table/ColumnsStore";
 import { SaveProvider } from "@/common/saveData/SaveProvider";
-import CellString from "@/components/TablesCells/CellString";
+import CellString from "@/components/common/TablesCells/CellString";
 import transferOperationStore, { TLead } from "../store/TransferTableStore";
 
 

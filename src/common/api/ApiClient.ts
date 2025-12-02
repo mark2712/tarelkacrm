@@ -17,11 +17,11 @@ export interface ApiResponseJson<T> {
 }
 
 export interface ApiResponse<T> {
-    ok: boolean;              // fetch-level ok (network/HTTP)
+    ok: boolean; // fetch-level ok (network/HTTP)
     status: number;
     json?: ApiResponseJson<T>;
     rawText: string;
-    error?: string;           // ошибка уровня fetch/json/validation
+    error?: string; // ошибка уровня fetch/json/validation
     headers: Record<string, string>;
 }
 
@@ -63,6 +63,7 @@ export class ApiClient {
         try {
             response = await fetch(path, {
                 method: "POST",
+                credentials: "include",
                 headers: this.buildHeaders(),
                 body: this.buildBody(body),
             });

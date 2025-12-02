@@ -1,7 +1,7 @@
 "use client";
 
 import { observer } from "mobx-react-lite";
-import { TableData } from "@/components/Table/TableData";
+import { TableData } from "@/components/common/Table/TableData";
 import TableHeadCell from "./TableHeadCell";
 
 interface TableHeadProps<Row> {

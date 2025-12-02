@@ -3,13 +3,13 @@
 
     tr,
     td {
-        border: 1px solid #222;
+        border: 1px solid #bbb;
     }
 
     th {
         background-color: #EEEEFF;
-        border-left: 1px solid #222;
-        border-right: 1px solid #222;
+        border-left: 1px solid #999;
+        border-right: 1px solid #999;
     }
 
     td {

@@ -1,5 +1,5 @@
 import { makeAutoObservable, action, observable, computed, toJS } from "mobx";
-import { BaseColumn } from "@/components/Table/ColumnsStore";
+import { BaseColumn } from "@/components/common/Table/ColumnsStore";
 import { ISaveProvider } from "@/common/saveData/ISaveProvider";
 
 

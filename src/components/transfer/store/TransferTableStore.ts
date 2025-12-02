@@ -1,8 +1,8 @@
 "use client";
 
 import { action, reaction, toJS } from "mobx";
-import { OperationsController } from "@/components/Table/Operations/store/OperationsController";
-import { Operation } from "@/components/Table/Operations/store/Operation";
+import { OperationsController } from "@/components/common/Table/Operations/store/OperationsController";
+import { Operation } from "@/components/common/Table/Operations/store/Operation";
 
 import { ISaveProvider } from "@/common/saveData/ISaveProvider";
 import { SaveProvider } from "@/common/saveData/SaveProvider";

@@ -2,9 +2,9 @@
 
 import { observer } from "mobx-react-lite";
 import { TLead } from "../store/TransferTableStore";
-import { Operation } from "@/components/Table/Operations/store/Operation";
+import { Operation } from "@/components/common/Table/Operations/store/Operation";
 import { CheckboxCards, Flex, Text, Card, Switch, TextField, Separator } from "@radix-ui/themes";
-import operationCSS from "@/components/Table/Operations/operation.module.css";
+import operationCSS from "@/components/common/Table/Operations/operation.module.css";
 
 
 export interface TPeopleFilter { min: number | null; max: number | null; excludeEmpty: boolean };
