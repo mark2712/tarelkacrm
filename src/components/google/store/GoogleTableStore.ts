@@ -4,6 +4,7 @@ import { OperationsController } from "@/components/common/Table/Operations/store
 import { ISaveProvider } from "@/common/saveData/ISaveProvider";
 import { Operation } from "@/components/common/Table/Operations/store/Operation";
 import { SaveProvider } from "@/common/saveData/SaveProvider";
+import { LabelsFilter } from "../operations/LabelsFilter";
 
 
 export interface Contact {
@@ -106,15 +107,27 @@ class GoogleTableStore extends OperationsController<Contact> {
         const userDefined = p.userDefined?.map(u => `${u.key}: ${u.value}`).join(", ") ?? "";
 
         // группы
-        const labels = p.memberships
-            ?.map(m => {
-                const id = m.contactGroupMembership?.contactGroupId;
-                if (id === "starred") return "⭐Избранное";
-                if (id && id !== "myContacts") return id; // Имя группы можно подставить из внешнего словаря, как в PHP
-                return "";
-            })
-            .filter(Boolean)
-            .join(", ") ?? "";
+        const labels =
+            p.memberships
+                ?.map(m => {
+                    const cg = m.contactGroupMembership;
+                    if (!cg) return "";
+
+                    const id = cg.contactGroupId;
+                    const name = cg.formattedName;
+
+                    if (id === "starred") return "⭐Избранное";
+                    if (id === "myContacts") return "";
+
+                    // если formattedName есть — используем его
+                    if (name) return name;
+
+                    // fallback на id (на случай если бекенд не отдал имя)
+                    return id ?? "";
+                })
+                .filter(Boolean)
+                .join(", ") ?? "";
+
 
         return {
             name,
@@ -141,48 +154,7 @@ class GoogleTableStore extends OperationsController<Contact> {
 
 export const googleTableStore = new GoogleTableStore(
     new SaveProvider("GoogleContactsOperationStore"),
-    []
+    [
+        new LabelsFilter(),
+    ]
 );
-
-
-
-// private mapToText(p: GooglePerson): Contact {
-//     return {
-//         names: p.names?.map((n: any) => n.displayName).join(", ") ?? "",
-//         emails: p.emailAddresses?.map((e: any) => e.value).join(", ") ?? "",
-//         phones: p.phoneNumbers?.map((ph: any) => ph.value).join(", ") ?? "",
-//         genders: p.genders?.map((g: any) => g.value).join(", ") ?? "",
-//         photos: p.photos?.[0]?.url ?? "",
-//     };
-// }
-
-// export interface Contact {
-//     names: string;
-//     emails: string;
-//     phones: string;
-//     genders: string;
-//     photos: string;
-// }
-
-// export interface Contact {
-//     names: string;
-//     emails: string;
-//     phones: string;
-//     genders: string;
-//     photos: string;
-
-//     addresses: string;
-//     organizations: string;
-//     biographies: string;
-//     nicknames: string;
-//     birthdays: string;
-//     relations: string;
-//     events: string;
-//     urls: string;
-//     userDefined: string;
-//     memberships: string;
-
-//     ageRange: string;
-//     resourceName: string;
-//     etag: string;
-// }

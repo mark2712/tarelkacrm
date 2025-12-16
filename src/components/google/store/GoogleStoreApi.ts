@@ -24,6 +24,10 @@ export type GooglePerson = {
     memberships?: any[];
 };
 
-export const googleStoreApi = new ApiStore<GooglePerson[]>(apiUrls.GOOGLE_GET_CONTACTS, {});
+export const googleStoreApi = new ApiStore<GooglePerson[]>(apiUrls.GOOGLE_GET_CONTACTS, {
+    'PHPSESSID': '1047d2f5a1df680ba48c90b186a680f3',
+    // 'session_token': '4f9612473df0addae8c2c12f992a0968',
+    'session_token': 'eedc076c0a0cbfed33b3bc210f64cb11',
+});
 export default googleStoreApi;
 
