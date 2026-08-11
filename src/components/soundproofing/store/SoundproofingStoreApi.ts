@@ -8,7 +8,6 @@ export function getToken(token: string = "") {
     if (typeof window !== "undefined") {
         token = localStorage["SOUNDPROOFING_API_TOKEN"] ? localStorage["SOUNDPROOFING_API_TOKEN"] : token;
     }
-    return 'sf_token_7a91f34b8csg8usdg4lk02e5d6asdjk87dsvazmsaj3342';
     return token;
 }
 
