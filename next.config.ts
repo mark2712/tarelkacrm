@@ -1,7 +1,8 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
-  basePath: '/app/main',
+  // basePath: '/app/main',
+  basePath: '/soundproofing/crm',
   output: 'export',
   trailingSlash: true,
 };
