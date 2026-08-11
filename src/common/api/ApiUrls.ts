@@ -7,6 +7,7 @@ export const apiUrls = {
     GOOGLE_GET_CONTACTS_OLD: `${baseUrl}/PeopleService_json.php`,
     GOOGLE_GET_CONTACTS: `${baseUrl}/api/google_api/PeopleService_json.php`,
     TRANSFER_GET_LEADS: `${baseUrl}/transfer/leads.php`,
+    SOUNDPROOFING_GET_LEADS: `https://msss.ru/soundproofing/php/api/table/`,
 } as const;
 
 export default apiUrls;

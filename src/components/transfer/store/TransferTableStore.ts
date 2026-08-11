@@ -7,7 +7,7 @@ import { Operation } from "@/components/common/Table/Operations/store/Operation"
 import { ISaveProvider } from "@/common/saveData/ISaveProvider";
 import { SaveProvider } from "@/common/saveData/SaveProvider";
 
-import { DeleteTestNames } from "../operations/DeleteTestNames";
+import { DeleteTestNames } from "../operations/deleteTestNames";
 import { PeopleFilter } from "../operations/peopleFilter";
 import transferStoreApi, { TransferZakaz } from "./TransferStoreApi";
 import { TransportNormalizer } from "../operations/TransportNormalizer";
