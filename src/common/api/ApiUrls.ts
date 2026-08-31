@@ -10,4 +10,25 @@ export const apiUrls = {
     SOUNDPROOFING_GET_LEADS: `https://msss.ru/soundproofing/php/api/table/`,
 } as const;
 
-export default apiUrls;
+export interface ApiTokenInfo {
+    key: string;
+    label: string;
+    description: string;
+}
+
+export const apiTokens = {
+    SOUNDPROOFING_API_TOKEN: {
+        key: "SOUNDPROOFING_API_TOKEN",
+        label: "Soundproofing API Token",
+        description: "Токен для доступа к API заявок звукоизоляции (msss.ru)",
+    },
+    TRANSFER_API_TOKEN: {
+        key: "TRANSFER_API_TOKEN",
+        label: "Transfer API Token",
+        description: "Токен для доступа к API заявок трансфера (waygo.webtm.ru)",
+    },
+} as const;
+
+export type ApiTokenKey = keyof typeof apiTokens;
+
+export default apiUrls;

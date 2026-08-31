@@ -1,12 +1,12 @@
 "use client";
 
-import apiUrls from "@/common/api/ApiUrls";
+import apiUrls, { apiTokens } from "@/common/api/ApiUrls";
 import { ApiStore } from "@/common/api/ApiStore";
 
 
 export function getToken(token: string = "") {
     if (typeof window !== "undefined") {
-        token = localStorage["SOUNDPROOFING_API_TOKEN"] ? localStorage["SOUNDPROOFING_API_TOKEN"] : token;
+        token = localStorage[apiTokens.SOUNDPROOFING_API_TOKEN.key] ? localStorage[apiTokens.SOUNDPROOFING_API_TOKEN.key] : token;
     }
     return token;
 }

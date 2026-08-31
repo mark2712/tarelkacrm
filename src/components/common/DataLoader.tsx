@@ -3,8 +3,9 @@
 import { ApiStore } from "@/common/api/ApiStore";
 import { observer } from "mobx-react-lite";
 // import { useEffect } from "react";
-import { InfoCircledIcon, TimerIcon, Link2Icon } from "@radix-ui/react-icons";
-import { Callout, Separator, Flex, Strong } from "@radix-ui/themes";
+import { InfoCircledIcon, TimerIcon, Link2Icon, LockClosedIcon } from "@radix-ui/react-icons";
+import { Callout, Separator, Flex, Strong, IconButton } from "@radix-ui/themes";
+import { TokenManagerModal } from "@/common/tokens";
 
 
 interface DataLoaderProps<T> {
@@ -25,24 +26,41 @@ export const DataLoader = observer(<T,>({
 
     const count = Array.isArray(store.data) ? store.data.length : undefined;
 
-    const callout = (<Callout.Root color="gray" mt="2" style={{ margin: "10px" }}>
-        <Flex align="center" gap="3" style={{ flexWrap: "wrap" }}>
-            <Flex align="center">
-                <Callout.Icon style={{ marginRight: "4px" }} ><InfoCircledIcon /></Callout.Icon>
-                <Callout.Text>{label ?? "Загружено элементов"}:  <Strong>{count ?? "—"}</Strong></Callout.Text>
+    const callout = (
+        <Callout.Root color="gray" mt="2" style={{ margin: "10px" }}>
+            <Flex align="center" gap="3" style={{ flexWrap: "wrap" }}>
+                <TokenManagerModal
+                    showFloatingButton={false}
+                    trigger={
+                        <IconButton
+                            size="1"
+                            variant="ghost"
+                            color="gray"
+                            style={{ cursor: "pointer" }}
+                            title="Управление API-токенами"
+                        >
+                            <LockClosedIcon width="16" height="16" />
+                        </IconButton>
+                    }
+                />
+                <Separator orientation="vertical" />
+                <Flex align="center">
+                    <Callout.Icon style={{ marginRight: "4px" }}><InfoCircledIcon /></Callout.Icon>
+                    <Callout.Text>{label ?? "Загружено элементов"}:  <Strong>{count ?? "—"}</Strong></Callout.Text>
+                </Flex>
+                <Separator orientation="vertical" />
+                <Flex align="center">
+                    <Callout.Icon style={{ marginRight: "4px" }}><TimerIcon /></Callout.Icon>
+                    <Callout.Text>Время загрузки: <Strong>{store.loadTime ? store.loadTime.toFixed(3) + " сек" : "—"}</Strong></Callout.Text>
+                </Flex>
+                <Separator orientation="vertical" />
+                <Flex align="center">
+                    <Callout.Icon style={{ marginRight: "4px" }}><Link2Icon /></Callout.Icon>
+                    <Callout.Text>Страница api: <Strong>{store.endpoint}</Strong></Callout.Text>
+                </Flex>
             </Flex>
-            <Separator orientation="vertical" />
-            <Flex align="center">
-                <Callout.Icon style={{ marginRight: "4px" }} ><TimerIcon /></Callout.Icon>
-                <Callout.Text>Время загрузки: <Strong>{store.loadTime ? store.loadTime.toFixed(3) + " сек" : "—"}</Strong></Callout.Text>
-            </Flex>
-            <Separator orientation="vertical" />
-            <Flex align="center">
-                <Callout.Icon style={{ marginRight: "4px" }} ><Link2Icon /></Callout.Icon>
-                <Callout.Text>Страница api: <Strong>{store.endpoint}</Strong></Callout.Text>
-            </Flex>
-        </Flex>
-    </Callout.Root >);
+        </Callout.Root>
+    );
 
 
     // ----- авто-режим -----
@@ -59,14 +77,30 @@ export const DataLoader = observer(<T,>({
 
     // ----- ручной режим -----
     return (
-        <div>
-            <button
-                onClick={() => store.load()}
-                disabled={store.loading}
-                className="px-4 py-2 rounded bg-blue-500 text-white hover:bg-blue-600 disabled:bg-gray-400"
-            >
-                {store.loading ? "Загрузка..." : "Загрузить"}
-            </button>
+        <div style={{ margin: "10px" }}>
+            <Flex align="center" gap="3">
+                <button
+                    onClick={() => store.load()}
+                    disabled={store.loading}
+                    className="px-4 py-2 rounded bg-blue-500 text-white hover:bg-blue-600 disabled:bg-gray-400 cursor-pointer"
+                >
+                    {store.loading ? "Загрузка..." : "Загрузить"}
+                </button>
+                <TokenManagerModal
+                    showFloatingButton={false}
+                    trigger={
+                        <IconButton
+                            size="2"
+                            variant="soft"
+                            color="gray"
+                            style={{ cursor: "pointer" }}
+                            title="Управление API-токенами"
+                        >
+                            <LockClosedIcon width="16" height="16" />
+                        </IconButton>
+                    }
+                />
+            </Flex>
 
             {!store.loading && store.data && (callout)}
         </div>
