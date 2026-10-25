@@ -17,6 +17,7 @@ import {
     PaperPlaneIcon,
     ArrowRightIcon,
     ExternalLinkIcon,
+    HeartFilledIcon,
 } from "@radix-ui/react-icons";
 
 const projects = [
@@ -43,6 +44,14 @@ const projects = [
         badge: "WayGo",
         badgeColor: "purple" as const,
         icon: <PaperPlaneIcon width="24" height="24" style={{ color: "var(--purple-9)" }} />,
+    },
+    {
+        title: "Цветы Курск",
+        href: "/flowerskursk",
+        description: "Заказы интернет-магазина цветов Flowers Kursk, состав букетов и доставка",
+        badge: "FlowersKursk",
+        badgeColor: "crimson" as const,
+        icon: <HeartFilledIcon width="24" height="24" style={{ color: "var(--crimson-9)" }} />,
     },
 ];
 
