@@ -2,6 +2,7 @@ import { TableData } from "@/components/common/Table/TableData";
 import { BaseColumn } from "@/components/common/Table/ColumnsStore";
 import { SaveProvider } from "@/common/saveData/SaveProvider";
 import CellString from "@/components/common/TablesCells/CellString";
+import CellOtherData from "../cells/CellOtherData";
 import soundproofingTableStore, { TSoundproofingLead } from "../store/SoundproofingTableStore";
 
 const tableData = new TableData(
@@ -18,7 +19,8 @@ const tableData = new TableData(
         new BaseColumn<TSoundproofingLead, "url">("url", CellString).Title("URL"),
         new BaseColumn<TSoundproofingLead, "firstReferrer">("firstReferrer", CellString).Title("Реферер"),
         new BaseColumn<TSoundproofingLead, "firstPage">("firstPage", CellString).Title("Страница входа"),
-        new BaseColumn<TSoundproofingLead, "otherData">("otherData", CellString).Title("Доп. данные"),
+        new BaseColumn<TSoundproofingLead, "otherData">("otherData", CellOtherData).Title("Доп. данные"),
+        new BaseColumn<TSoundproofingLead, "ip">("ip", CellString).Title("IP"),
     ],
     () => soundproofingTableStore.resultTable,
     new SaveProvider("SoundproofingTableSettings"),

@@ -27,6 +27,7 @@ export interface TSoundproofingLead {
     ymUid: string;
     ymCounter: string;
     otherData: string;
+    ip: string;
     raw: SoundproofingRawLead;
 }
 
@@ -65,6 +66,7 @@ export class SoundproofingTableStore extends OperationsController<TSoundproofing
                 ymUid: lead.ym_uid || "",
                 ymCounter: lead.ym_counter || "",
                 otherData: lead.other_data || "",
+                ip: lead.ip || "",
                 raw: lead,
             };
         } catch (error) {

@@ -29,6 +29,7 @@ export type SoundproofingRawLead = {
     phone: string | null;
     message: string | null;
     other_data: string | null;
+    ip: string | null;
     geo: string | null;
     geo_id: string | null;
     section_name: string | null;
